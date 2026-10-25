@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mitadrishi – Enterprise Content Management as a Service</title>
+<meta name="description" content="Secure, scalable, AI-assisted Enterprise Content Management delivered as SaaS, with healthcare interoperability.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f7f4;--surface:#fff;--ink:#14283a;--muted:#546574;--line:#d9e0dd;--teal:#0e7667;--teal-ink:#fff;--deep:#14283a;--deep-ink:#eaf1ef;--signal:#c8431f;--mist:#e5ece9;
+--serif:"Source Serif 4",Georgia,serif;--sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a24;--surface:#152433;--ink:#e8eeec;--muted:#a3b3bd;--line:#26394a;--teal:#3fc2ac;--teal-ink:#07201b;--deep:#0a131b;--deep-ink:#e8eeec;--signal:#ff7a52;--mist:#1a2e3d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1a24;--surface:#152433;--ink:#e8eeec;--muted:#a3b3bd;--line:#26394a;--teal:#3fc2ac;--teal-ink:#07201b;--deep:#0a131b;--deep-ink:#e8eeec;--signal:#ff7a52;--mist:#1a2e3d;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.65 var(--sans)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;margin:0 0 .6em;letter-spacing:-.01em}
+h1{font-size:clamp(2.2rem,5vw,3.6rem)}h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}h3{font-size:1.2rem}
+p{margin:0 0 1em;max-width:68ch}a{color:inherit}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.muted{color:var(--muted)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font:600 1.35rem var(--serif);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:22px;height:22px;border:2px solid var(--teal);border-radius:4px;position:relative}
+.logo i::after{content:"";position:absolute;left:4px;top:4px;right:-6px;bottom:-6px;border:2px solid var(--ink);border-radius:4px;background:var(--bg);z-index:-1}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;align-items:center}
+nav a{text-decoration:none;font-weight:500;font-size:.95rem}nav a:hover{color:var(--teal)}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;background:var(--teal);color:var(--teal-ink);font-weight:600;text-decoration:none;border:0;cursor:pointer;font:600 1rem var(--sans)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+#menu{display:none;background:none;border:1.5px solid var(--line);color:var(--ink);border-radius:6px;padding:8px 12px;font:500 .95rem var(--sans);cursor:pointer}
+/* hero */
+.hero{padding:72px 0 88px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.hero p.lead{font-size:1.15rem;color:var(--muted)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 18px 40px -24px rgba(20,40,58,.5)}
+.doc-h{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;font-weight:600;font-size:.95rem}
+.doc-h span{color:var(--muted);font-weight:400}
+.doc dl{margin:0;padding:14px 18px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:.9rem}
+.doc dt{color:var(--muted)}.doc dd{margin:0}
+.tags span{display:inline-block;background:var(--mist);border-radius:4px;padding:1px 8px;margin:0 4px 4px 0;font-size:.82rem}
+.audit{border-top:1px solid var(--line);padding:14px 18px;background:var(--mist);min-height:158px}
+.audit b{font-size:.85rem}
+.audit ol{list-style:none;margin:8px 0 0;padding:0;font-size:.85rem}
+.audit li{padding:3px 0;border-left:3px solid var(--teal);padding-left:10px;margin-bottom:4px}
+.audit li.new{border-color:var(--signal);animation:in .5s}
+@keyframes in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;padding:0;list-style:none}
+.badges li{border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:.88rem;background:var(--surface)}
+/* features */
+#features{background:var(--surface);border-block:1px solid var(--line)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:28px 0 28px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:12px 16px;font:500 1rem var(--sans);cursor:pointer;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--teal)}
+.panel[hidden]{display:none}
+.panel{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px}
+.panel div{padding:18px 0;border-bottom:1px solid var(--line)}
+.panel h3{margin-bottom:.3em;font-family:var(--sans);font-size:1.02rem;font-weight:600}
+.panel p{margin:0;color:var(--muted);font-size:.96rem}
+/* healthcare */
+#health{background:var(--deep);color:var(--deep-ink)}
+#health .muted{color:#b5c4cc}
+.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.hgrid div{border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:24px}
+.hgrid h3{color:#6fe0cb}
+.hgrid p{margin:0;font-size:.96rem;color:#c9d6dc}
+/* vision / about */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.vision-q{font:500 clamp(1.4rem,2.6vw,1.9rem)/1.35 var(--serif);border-left:4px solid var(--signal);padding-left:22px;margin:0 0 24px}
+.vals{list-style:none;padding:0;margin:0}
+.vals li{padding:14px 0;border-bottom:1px solid var(--line)}
+.vals strong{display:block}
+#about{background:var(--mist)}
+/* contact */
+form{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);padding:28px;border-radius:10px}
+label{font-weight:500;font-size:.92rem;display:grid;gap:6px}
+input,textarea,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:11px 12px;width:100%}
+textarea{min-height:110px;resize:vertical}
+.err{color:var(--signal);font-size:.85rem;min-height:1em}
+#ok{display:none;padding:14px;border-radius:6px;background:var(--mist);border-left:4px solid var(--teal)}
+.cinfo p{margin-bottom:.4em}
+footer{background:var(--deep);color:#c9d6dc;padding:32px 0;font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){
+ .hero .wrap,.two,.panel,.hgrid{grid-template-columns:1fr}
+ .two{gap:32px}section{padding:64px 0}
+ #menu{display:block}
+ nav ul{display:none;position:absolute;left:0;right:0;top:68px;background:var(--bg);flex-direction:column;align-items:flex-start;padding:16px 24px;border-bottom:1px solid var(--line);gap:14px}
+ nav ul.open{display:flex}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+:root{--violet:#7c4dff;--amber:#f5a524;--sky:#1b78b8;--rose:#e8467c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#5cc3f2}}
+:root[data-theme="dark"]{--sky:#5cc3f2}
+.hero,#vision,#health,#contact{position:relative;overflow:hidden}
+.hero .wrap,#vision .wrap,#health .wrap{position:relative;z-index:1}
+.blobs{position:absolute;inset:0;z-index:0;pointer-events:none}
+.blobs i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.42;animation:drift 18s ease-in-out infinite alternate}
+.blobs i:nth-child(1){width:420px;height:420px;background:var(--teal);left:-90px;top:-70px}
+.blobs i:nth-child(2){width:380px;height:380px;background:var(--violet);right:-70px;top:30px;animation-delay:-6s}
+.blobs i:nth-child(3){width:340px;height:340px;background:var(--amber);left:42%;bottom:-130px;animation-delay:-11s;opacity:.32}
+.blobs i:nth-child(4){width:260px;height:260px;background:var(--rose);right:30%;top:-90px;animation-delay:-3s;opacity:.25}
+@keyframes drift{to{transform:translate(70px,50px) scale(1.18)}}
+.btn:not(.ghost){background:linear-gradient(100deg,var(--teal),var(--sky))}
+.doc::before{content:"";display:block;height:5px;background:linear-gradient(90deg,var(--teal),var(--sky),var(--violet),var(--amber))}
+.badges li:nth-child(1){border-color:var(--teal)}.badges li:nth-child(2){border-color:var(--violet)}.badges li:nth-child(3){border-color:var(--amber)}.badges li:nth-child(4){border-color:var(--sky)}.badges li:nth-child(5){border-color:var(--rose)}
+.panel div{position:relative;padding-left:58px}
+.panel div::before{content:"";position:absolute;left:0;top:18px;width:38px;height:38px;border-radius:11px;background:var(--c,var(--teal))}
+.panel div::after{content:"";position:absolute;left:12px;top:30px;width:14px;height:14px;border:3px solid #fff;border-radius:4px;transform:translateY(-11px) rotate(0deg)}
+.panel div:nth-child(5n+1){--c:var(--teal)}.panel div:nth-child(5n+2){--c:var(--violet)}.panel div:nth-child(5n+3){--c:#d98a0b}.panel div:nth-child(5n+4){--c:var(--sky)}.panel div:nth-child(5n+5){--c:var(--rose)}
+.tabs button[aria-selected="true"]{border-color:var(--violet)}
+#health{background:linear-gradient(135deg,#0a1b2a,#12394a 55%,#241f5e)}
+#net{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hgrid div{background:rgba(255,255,255,.07);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.18);border-top-width:4px}
+.hgrid div:nth-child(1){border-top-color:#6fe0cb}.hgrid div:nth-child(2){border-top-color:#f5a524}.hgrid div:nth-child(3){border-top-color:#b79cff}
+.shape{position:absolute;z-index:0;pointer-events:none}
+.shape b{display:block;width:100%;height:100%;animation:spin 30s linear infinite}
+.s1{width:150px;height:150px;right:6%;top:50px}.s1 b{border:14px solid var(--teal);border-radius:50%;opacity:.35}
+.s2{width:90px;height:90px;left:3%;bottom:60px}.s2 b{background:var(--violet);border-radius:22px;opacity:.3}
+.s3{width:70px;height:70px;right:22%;bottom:40px}.s3 b{background:var(--amber);border-radius:50%;opacity:.45;animation:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+#about{background:linear-gradient(160deg,var(--mist),color-mix(in srgb,var(--violet) 14%,var(--bg)))}
+#contact{background:linear-gradient(160deg,var(--bg),color-mix(in srgb,var(--teal) 16%,var(--bg)))}
+.panel:not([hidden]) div{animation:rise .55s cubic-bezier(.2,.7,.2,1) backwards}
+.panel:not([hidden]) div:nth-child(2){animation-delay:.08s}.panel:not([hidden]) div:nth-child(3){animation-delay:.16s}.panel:not([hidden]) div:nth-child(4){animation-delay:.24s}.panel:not([hidden]) div:nth-child(5){animation-delay:.32s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+.panel:not([hidden]) div::before{animation:pop .6s cubic-bezier(.3,1.6,.5,1) backwards}
+@keyframes pop{from{transform:scale(.3) rotate(-30deg);opacity:0}}
+.panel div::before{transition:transform .25s,box-shadow .25s}
+.panel div:hover::before{transform:rotate(-8deg) scale(1.1);box-shadow:0 0 0 7px color-mix(in srgb,var(--c) 25%,transparent)}
+#about{position:relative;overflow:hidden}
+#about .wrap,#contact .wrap{position:relative;z-index:1}
+#about .blobs i{opacity:.25}
+.js .rv{opacity:0;transform:translateX(-28px);transition:opacity .7s,transform .7s}
+.js .rv.r{transform:translateX(28px)}
+.js .rv.in{opacity:1;transform:none}
+.vals li{position:relative}
+.vals li::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--teal),var(--violet),var(--amber));transition:width 1s .35s}
+.vals li.in::after{width:100%}
+#contact{background:linear-gradient(120deg,var(--bg),color-mix(in srgb,var(--teal) 18%,var(--bg)),color-mix(in srgb,var(--violet) 16%,var(--bg)),var(--bg));background-size:300% 300%;animation:flow 14s ease-in-out infinite alternate}
+@keyframes flow{to{background-position:100% 50%}}
+form .btn{position:relative;overflow:hidden}
+form .btn::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 3.6s ease-in-out infinite}
+@keyframes shine{60%,100%{left:130%}}
+input:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 4px color-mix(in srgb,var(--teal) 25%,transparent);outline:none}
+#cform{transition:transform .3s,box-shadow .3s}
+#cform:focus-within{transform:translateY(-4px);box-shadow:0 24px 50px -28px rgba(20,40,58,.55)}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <a class="logo" href="#top"><i></i>Mitadrishi</a>
+  <button id="menu" aria-expanded="false" aria-controls="nav-list">Menu</button>
+  <nav aria-label="Main"><ul id="nav-list">
+   <li><a href="#features">Platform</a></li>
+   <li><a href="#health">Healthcare</a></li>
+   <li><a href="#vision">Vision</a></li>
+   <li><a href="#about">About us</a></li>
+   <li><a class="btn" href="#contact">Request a demo</a></li>
+  </ul></nav>
+ </div>
+</header>
+
+<main id="top">
+<section class="hero">
+ <div class="blobs" aria-hidden="true"><i data-speed="0.08"></i><i data-speed="-0.06"></i><i data-speed="0.12"></i><i data-speed="-0.1"></i></div>
+ <div class="wrap">
+  <div>
+   <h1>Enterprise content management that is secure, scalable and intelligent.</h1>
+   <p class="lead">A fully managed SaaS ECM platform for organizations that need strict content governance, deep integrations and healthcare-ready interoperability.</p>
+   <div class="cta"><a class="btn" href="#contact">Request a customized demo</a><a class="btn ghost" href="#features">Explore the platform</a></div>
+   <ul class="badges"><li>GDPR</li><li>HIPAA</li><li>CMIS</li><li>FHIR &amp; HL7</li><li>ABDM</li></ul>
+  </div>
+  <div class="doc" data-speed="0.04" aria-label="Example document record">
+   <div class="doc-h">Discharge-Summary-4821.pdf <span>v3 · locked by R. Iyer</span></div>
+   <dl>
+    <dt>Document type</dt><dd>Clinical summary</dd>
+    <dt>Storage</dt><dd>Azure Blob (encrypted)</dd>
+    <dt>OCR</dt><dd>Text extracted from scan</dd>
+    <dt>AI tags</dt><dd class="tags"><span>Cardiology</span><span>Inpatient</span><span>Confidential</span></dd>
+    <dt>Archive on</dt><dd>12 Mar 2033</dd>
+   </dl>
+   <div class="audit"><b>Audit trail</b><ol id="audit" aria-live="off"></ol></div>
+  </div>
+ </div>
+</section>
+
+<section id="features">
+ <div class="wrap">
+  <h2>Core platform features and architecture</h2>
+  <p class="muted">Empower your organization with a secure, scalable and intelligent ECM platform, delivered as a fully managed SaaS service and designed for modern compliance and deep enterprise integration.</p>
+  <div class="tabs" role="tablist" aria-label="Feature areas"></div>
+  <div id="panels"></div>
+ </div>
+</section>
+
+<section id="health"><canvas id="net" aria-hidden="true"></canvas>
+ <div class="wrap">
+  <h2>Tailored healthcare solutions: EMR/EHR integration</h2>
+  <p class="muted">Optimized for healthcare entities, clinics and hospital networks, the platform bridges unstructured document management and clinical workflows.</p>
+  <div class="hgrid">
+   <div><h3>Built-in EMR/EHR support</h3><p>Connect seamlessly with electronic medical and health record systems.</p></div>
+   <div><h3>ABDM integration</h3><p>Full support for the Ayushman Bharat Digital Mission framework for India's digital healthcare ecosystem.</p></div>
+   <div><h3>FHIR and HL7 standards</h3><p>Native integration that follows global FHIR and HL7 standards for secure clinical data exchange.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="vision">
+ <div class="shape s1" data-speed="0.15" aria-hidden="true"><b></b></div><div class="shape s2" data-speed="-0.1" aria-hidden="true"><b></b></div><div class="shape s3" data-speed="0.22" aria-hidden="true"><b></b></div>
+ <div class="wrap two">
+  <div>
+   <h2>Our vision</h2>
+   <p class="vision-q">Every organization should be able to trust, find and use its content, without trading away security or compliance.</p>
+  </div>
+  <div>
+   <p>We want content infrastructure to be a quiet strength: governed by default, searchable in seconds and connected to the systems where work happens, from finance back-offices to hospital wards.</p>
+   <ul class="vals">
+    <li><strong>Security first</strong><span class="muted">Encryption, access control and audit are part of the foundation, not add-ons.</span></li>
+    <li><strong>Open by design</strong><span class="muted">Standards such as CMIS, FHIR and HL7 keep your data portable and connected.</span></li>
+    <li><strong>Intelligence that helps</strong><span class="muted">AI removes manual filing, tagging and permission work so people can focus on decisions.</span></li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<section id="about">
+ <div class="blobs" aria-hidden="true"><i data-speed="0.1"></i><i data-speed="-0.08"></i><i data-speed="0.12"></i><i data-speed="-0.06"></i></div>
+ <div class="wrap two">
+  <div>
+   <h2>About us</h2>
+   <p>We build and run a managed Enterprise Content Management platform for organizations with demanding governance requirements. Our team combines experience in content management, information security and healthcare interoperability.</p>
+   <p>As a SaaS provider, we handle hosting, scaling, updates and monitoring, so your teams spend their time on the content, not the infrastructure.</p>
+  </div>
+  <div>
+   <ul class="vals">
+    <li><strong>Fully managed</strong><span class="muted">We operate the platform. You configure it to fit your business.</span></li>
+    <li><strong>Built for regulated industries</strong><span class="muted">GDPR and HIPAA frameworks are built in, with a full audit trail.</span></li>
+    <li><strong>Healthcare-ready</strong><span class="muted">Hospitals and clinic networks connect through EMR/EHR, ABDM, FHIR and HL7.</span></li>
+   </ul>
+  </div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="shape s1" data-speed="0.14" aria-hidden="true"><b></b></div><div class="shape s2" data-speed="-0.12" aria-hidden="true"><b></b></div><div class="shape s3" data-speed="0.2" aria-hidden="true"><b></b></div>
+ <div class="wrap two">
+  <div class="cinfo">
+   <h2>Ready to modernize your content infrastructure?</h2>
+   <p>Discover how our SaaS ECM platform can secure your data, streamline compliance and boost productivity. Contact our sales team today for a customized demo.</p>
+   <p><strong>Email:</strong> <a href="mailto:sales@mitadrishi.com">sales@mitadrishi.com</a></p>
+   <p><strong>Phone:</strong> +91 76250 04512</p>
+   <p><strong>Address:</strong> Bengaluru, India</p>
+  </div>
+  <form id="cform" novalidate>
+   <label>Full name<input name="name" autocomplete="name" required><span class="err"></span></label>
+   <label>Work email<input name="email" type="email" autocomplete="email" required><span class="err"></span></label>
+   <label>Organization<input name="org" autocomplete="organization"></label>
+   <label>I'm interested in
+    <select name="topic"><option>Enterprise ECM</option><option>Healthcare / EMR integration</option><option>Compliance (GDPR / HIPAA)</option><option>Something else</option></select>
+   </label>
+   <label>Message<textarea name="msg" required></textarea><span class="err"></span></label>
+   <button class="btn" type="submit">Request a demo</button>
+   <div id="ok" role="status">Thanks. Your email app should open with your request. If it doesn't, write to sales@mitadrishi.com.</div>
+  </form>
+ </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> Mitadrishi. All rights reserved.</span><span>Enterprise Content Management as a Service</span></div></footer>
+
+<script>
+var F=[
+["Content modeling",[
+["Custom document types","Define document structures for your business with unique types and custom attributes."],
+["Flexible storage backends","Store content on local drives, databases, AWS S3 or Azure Blob storage."],
+["Organizational hierarchies","Parent entities inherit access to child content, while sibling units stay strictly isolated."]]],
+["Search & automation",[
+["Indexing and full-text search","Find files across the whole repository with fast indexing and full-text search."],
+["Integrated OCR","Extract searchable text from scanned documents and images automatically."],
+["AI-powered content recognition","Recognize content, tag it with the right attributes and assign permissions automatically."],
+["Format transformers","Convert documents from one format or type to another with dynamic transformers."]]],
+["Security & compliance",[
+["Hybrid access control","Combine attribute-based (ABAC) and role-based (RBAC) access control to protect sensitive assets."],
+["Encryption at rest","Keep data secure in fully encrypted document stores."],
+["Comprehensive audit trails","Review every user action on every piece of content."],
+["Lifecycle management","Auto-archive documents based on expiration dates."],
+["GDPR and HIPAA","Built-in compliance frameworks for global and regional standards."]]],
+["Collaboration & workflow",[
+["Cross-organizational collaboration","Work securely across organizational units and designated user groups."],
+["Versioning and locking","Keep documents intact with full version history and locks that prevent conflicting edits."],
+["Annotations and comments","Review and discuss content directly in the file."],
+["Custom workflows and triggers","Automate processes with a workflow engine, background jobs and triggers."],
+["Notifications and reminders","Never miss a deadline with automated notifications and document reminders."]]],
+["Viewing & interoperability",[
+["Rich document viewers","Open files in the browser, including a specialized DICOM viewer for medical imaging."],
+["CMIS compliant","Integrate with existing enterprise applications through CMIS standards."],
+["Advanced reporting","Report on repository usage, user activity and document lifecycles."]]]
+];
+var tabs=document.querySelector(".tabs"),panels=document.getElementById("panels");
+F.forEach(function(f,i){
+ var b=document.createElement("button");b.role="tab";b.id="t"+i;b.textContent=f[0];
+ b.setAttribute("aria-selected",i==0);b.setAttribute("aria-controls","p"+i);b.tabIndex=i?-1:0;tabs.appendChild(b);
+ var p=document.createElement("div");p.className="panel";p.id="p"+i;p.role="tabpanel";p.setAttribute("aria-labelledby","t"+i);p.hidden=i!=0;
+ p.innerHTML=f[1].map(function(x){return"<div><h3>"+x[0]+"</h3><p>"+x[1]+"</p></div>"}).join("");
+ panels.appendChild(p);
+});
+function pick(i){
+ var bs=tabs.children;
+ for(var k=0;k<bs.length;k++){bs[k].setAttribute("aria-selected",k==i);bs[k].tabIndex=k==i?0:-1;document.getElementById("p"+k).hidden=k!=i}
+ bs[i].focus();
+}
+tabs.addEventListener("click",function(e){var i=[].indexOf.call(tabs.children,e.target);if(i>-1)pick(i)});
+tabs.addEventListener("keydown",function(e){
+ var n=tabs.children.length,i=[].indexOf.call(tabs.children,document.activeElement);
+ if(e.key=="ArrowRight")pick((i+1)%n);else if(e.key=="ArrowLeft")pick((i+n-1)%n);
+});
+/* audit trail demo */
+var ev=["R. Iyer opened version 3","OCR text indexed","AI tags applied: Cardiology, Inpatient","Permissions assigned to Cardiology unit","A. Menon added an annotation","Archive reminder scheduled"],
+ol=document.getElementById("audit"),n=0;
+function add(){
+ var li=document.createElement("li");li.className="new";
+ li.textContent=("0"+(9+Math.floor(n/2))).slice(-2)+":"+(n%2?"41":"12")+"  "+ev[n%ev.length];
+ ol.insertBefore(li,ol.firstChild);
+ while(ol.children.length>4)ol.removeChild(ol.lastChild);
+ if(ol.children[1])ol.children[1].className="";
+ n++;
+}
+add();add();
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches)setInterval(add,2600);
+/* nav */
+var m=document.getElementById("menu"),nl=document.getElementById("nav-list");
+m.onclick=function(){var o=nl.classList.toggle("open");m.setAttribute("aria-expanded",o)};
+nl.addEventListener("click",function(e){if(e.target.tagName=="A"){nl.classList.remove("open");m.setAttribute("aria-expanded","false")}});
+document.getElementById("yr").textContent=new Date().getFullYear();
+/* parallax */
+var rm=matchMedia("(prefers-reduced-motion:reduce)").matches,px=[].slice.call(document.querySelectorAll("[data-speed]"));
+function par(){var h=innerHeight;px.forEach(function(el){var r=el.parentNode.getBoundingClientRect(),c=r.top+r.height/2-h/2;el.style.translate="0 "+(-c*el.dataset.speed).toFixed(1)+"px"})}
+if(!rm){addEventListener("scroll",function(){requestAnimationFrame(par)},{passive:true});par()}
+/* scroll reveals */
+var rv=[].slice.call(document.querySelectorAll("#about .two>div:first-child,.vals li,.cinfo,#cform"));
+rv.forEach(function(e,i){e.classList.add("rv");if(e.id=="cform")e.classList.add("r");if(e.tagName=="LI")e.style.transitionDelay=(i%3)*.15+"s"});
+document.documentElement.classList.add("js");
+if(rm||!window.IntersectionObserver)rv.forEach(function(e){e.classList.add("in")});
+else{var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target)}})},{threshold:.2});rv.forEach(function(e){io.observe(e)})}
+/* animated network */
+(function(){var c=document.getElementById("net"),x=c.getContext("2d"),P=[],W,H;
+function size(){var r=c.parentNode.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height}
+size();addEventListener("resize",size);
+for(var i=0;i<48;i++)P.push({x:Math.random(),y:Math.random(),vx:(Math.random()-.5)*.0004,vy:(Math.random()-.5)*.0004});
+function draw(){x.clearRect(0,0,W,H);
+P.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>1)p.vx*=-1;if(p.y<0||p.y>1)p.vy*=-1});
+for(var i=0;i<P.length;i++){var a=P[i];for(var j=i+1;j<P.length;j++){var b=P[j],dx=(a.x-b.x)*W,dy=(a.y-b.y)*H,d=Math.sqrt(dx*dx+dy*dy);
+if(d<150){x.strokeStyle="rgba(111,224,203,"+(1-d/150)*.45+")";x.beginPath();x.moveTo(a.x*W,a.y*H);x.lineTo(b.x*W,b.y*H);x.stroke()}}
+x.fillStyle=i%3?"#6fe0cb":"#f5a524";x.beginPath();x.arc(a.x*W,a.y*H,2.5,0,6.3);x.fill()}
+if(!rm)requestAnimationFrame(draw)}
+draw()})();
+/* form */
+document.getElementById("cform").addEventListener("submit",function(e){
+ e.preventDefault();var f=e.target,ok=true;
+ function chk(el,msg,bad){var s=el.parentNode.querySelector(".err");s.textContent=bad?msg:"";if(bad)ok=false}
+ chk(f.name,"Enter your name.",!f.name.value.trim());
+ chk(f.email,"Enter a valid work email.",!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value));
+ chk(f.msg,"Tell us a little about your needs.",!f.msg.value.trim());
+ if(!ok)return;
+ var body="Name: "+f.name.value+"\nOrganization: "+f.org.value+"\nEmail: "+f.email.value+"\nInterest: "+f.topic.value+"\n\n"+f.msg.value;
+ document.getElementById("ok").style.display="block";
+ location.href="mailto:sales@yourcompany.com?subject="+encodeURIComponent("Demo request")+"&body="+encodeURIComponent(body);
+});
+</script>
+</body>
+</html>
